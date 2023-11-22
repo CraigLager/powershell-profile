@@ -1,6 +1,14 @@
 $scriptPath = $MyInvocation.MyCommand.Path
-Write-Host "Loading Profile $scriptPath"
+$directoryPath = Split-Path -Parent $scriptPath
+$envScriptPath = "$directoryPath\env.ps1"
 
+if (Test-Path $envScriptPath) {
+    Write-Host "Loading Profile $scriptPath"
+    . $envScriptPath
+    Write-Host "ENV Loaded"
+} else {
+    Write-Host "env.ps1 not found"
+}
 
 Write-Host "ENV Loaded"
 
